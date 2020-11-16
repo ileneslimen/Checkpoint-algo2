@@ -1,0 +1,36 @@
+ALGORITHM SumOfDuplicates
+VAR
+    set1 : ARRAY_OF_INTEGER[4]
+    set2 : ARRAY_OF_INTEGER[4]
+    i, count, sum : INTEGER:=0;
+    index : ARRAY_OF INTEGER[4];
+    htab : HASH_TABLE<INTEGER,INTEGER> ;
+   
+BEGIN
+    
+     set1= [12, 13, 6, 10]
+     set2= [13, 10, 16, 15]
+   FOR i FROM 0 TO set1.length-1 STEP 1  DO
+       IF (htab.lookup(set1[i]) <> TRUE) THEN
+           count := htab.get(set1[i]);
+           htab.insert(set1[i], count+1);
+       ELSE
+           htab.insert(set1[i], 1);
+       END_IF
+   END_FOR 
+   FOR i FROM 0 TO set2.length-1 STEP 1  DO
+       IF (htab.lookup(set2[i]) <> TRUE) THEN
+           count := htab.get(set2[i]);
+           htab.insert(set2[i], count+1);
+       ELSE
+           htab.insert(set2[i], 1);
+       END_IF
+   END_FOR
+    index = htab.getindex();
+    FOR i FROM 0 TO index.length-1 DO
+        IF (htab.get(index[i]) = 1) THEN
+            sum = sum + index[i];
+        END_IF
+    END_FOR
+    
+END
